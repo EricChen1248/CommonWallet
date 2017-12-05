@@ -54,6 +54,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Class\ExtensionMethods.cs" />
+    <Compile Include="Class\Helper.cs" />
+    <Compile Include="UserControls\Coin.xaml.cs">
+      <DependentUpon>Coin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Wallet.xaml.cs">
+      <DependentUpon>Wallet.xaml</DependentUpon>
+    </Compile>
     <Page Include="Pages\Homepage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -80,6 +88,14 @@
     <Page Include="Pages\Login.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Coin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Wallet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +134,11 @@
     <Resource Include="Resources\MaximizeBtn_Hover.png" />
     <Resource Include="Resources\Minimize.png" />
     <Resource Include="Resources\Minimize_Hover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Database\Accounts.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

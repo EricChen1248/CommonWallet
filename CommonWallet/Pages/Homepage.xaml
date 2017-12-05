@@ -10,6 +10,7 @@
       Background="White">
 
     <Grid>
-        
+        <WrapPanel x:Name="WalletPanel" HorizontalAlignment="Left" Height="380" Margin="112,71,0,0" VerticalAlignment="Top" Width="380"/>
+
     </Grid>
 </Page>

@@ -12,7 +12,7 @@ namespace CommonWallet.Class
     /// </summary>
     internal static class Server
     {
-        private const string ServerLocation = "Database/";
+        private const string ServerLocation = "Resources/Database/";
 
         /// <summary>
         /// Pulls the data from file in a Dictionary of Lists with headers as keys
