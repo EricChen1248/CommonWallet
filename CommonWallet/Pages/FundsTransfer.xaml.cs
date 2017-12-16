@@ -101,6 +101,10 @@ namespace CommonWallet.Pages
                 MessageBox.Show(exception.Message);
             }
         }
+        private void CloseBtn_OnClick(object sender, RoutedEventArgs e)
+        {
+            MainWindow.Instance.DestroyFloatingFrame();
+        }
     }
 
 }

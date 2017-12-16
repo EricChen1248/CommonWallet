@@ -19,15 +19,44 @@
 
 
             <Button Content="Button" Margin="79,31,91,138"/>
-            <Label x:Name="Namel1Label" Content ="一號錢包" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17,10,0,0" FontFamily="Microsoft JhengHei" FontWeight="Bold" Foreground="#FF5F5F5F" FontSize="20" Width="271" Grid.Row="0" />
+            <Label x:Name="Namel1Label" Content ="一號錢包" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17,25,0,0" FontFamily="Microsoft JhengHei" FontWeight="Bold" Foreground="#FF5F5F5F" FontSize="20" Width="271" Grid.Row="0" />
             <Label x:Name="Namel2Label" Content="二號錢包" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17,5,0,0" FontFamily="Microsoft JhengHei" FontWeight="Bold" Foreground="#FF5F5F5F" FontSize="20" Width="271" Grid.Row="2"/>
-            <Label x:Name="Money1Label" Content ="$1,000" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalAlignment="Top" Margin="17,52,0,0" FontFamily="Bookman Old Style" FontWeight="Bold" Foreground="#FF5F5F5F" FontSize="20" Width="123" Grid.Row="0" />
+            <Label x:Name="Money1Label" Content ="$1,000" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalAlignment="Top" Margin="17,69,0,0" FontFamily="Bookman Old Style" FontWeight="Bold" Foreground="#FF5F5F5F" FontSize="20" Width="123" Grid.Row="0" />
             <Label x:Name="Money2Label" Content ="$1,000" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalAlignment="Top" Margin="17,47,0,0" FontFamily="Bookman Old Style" FontWeight="Bold" Foreground="#FF5F5F5F" FontSize="20" Width="123" Grid.Row="2"/>
-            <Label x:Name="NewMoney1Label" Content ="$1,000" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalAlignment="Top" Margin="256,52,0,0" FontFamily="Bookman Old Style" FontWeight="Bold" Foreground="#FF5F5F5F" FontSize="20" Width="132" Grid.Row="0" />
+            <Label x:Name="NewMoney1Label" Content ="$1,000" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalAlignment="Top" Margin="256,67,0,0" FontFamily="Bookman Old Style" FontWeight="Bold" Foreground="#FF5F5F5F" FontSize="20" Width="132" Grid.Row="0" />
             <Label x:Name="NewMoney2Label" Content ="$1,000" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalAlignment="Top" Margin="256,47,0,0" FontFamily="Bookman Old Style" FontWeight="Bold" Foreground="#FF5F5F5F" FontSize="20" Width="132" Grid.Row="2"/>
             <TextBox x:Name="TransferBox" Text="0" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" Height="30" Margin="20,20,191,24" Grid.Row="1" TextWrapping="Wrap"  Width="187" FontFamily="Bookman Old Style" TextChanged="TextBoxBase_OnTextChanged" FontWeight="Bold" FontSize="18"/>
             <Button Content="↓" HorizontalAlignment="Left" Margin="206,20,0,0" Grid.Row="1" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="37" Height="30" BorderBrush="#FF9B9B9B" Background="{x:Null}" Foreground="#FF767676" FontSize="20" Click="ButtonBase_OnClick"/>
             <Button Content="轉帳" HorizontalAlignment="Left" Margin="281,20,0,0" VerticalContentAlignment="Center" Grid.Row="1" VerticalAlignment="Top" Width="107" Height="30" FontFamily="Microsoft JhengHei" FontSize="20" BorderBrush="{x:Null}" Click="TransferBtn_OnClick"/>
+            <Button Grid.Row="0" x:Name="CloseBtn" HorizontalAlignment="Right" Height="30" Margin="0,0,0,82" Width="40" BorderBrush="{x:Null}" Foreground="{x:Null}" Click ="CloseBtn_OnClick" >
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <ImageBrush ImageSource="/CommonWallet;component/Resources/CloseBtn.png"/>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="/CommonWallet;component/Resources/CloseBtn_Hover.png"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
         </Grid>
     </Border>
 </Page>
