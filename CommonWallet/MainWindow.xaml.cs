@@ -112,7 +112,6 @@ namespace CommonWallet
 
         private void LoginSuccessful(Dictionary<string, string> userData)
         {
-            //App.DespawnPage("loginPage", (Page)Frame.Content);
             Frame.Content = new Homepage();
         }
 
