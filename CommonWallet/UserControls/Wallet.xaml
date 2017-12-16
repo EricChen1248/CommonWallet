@@ -4,11 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
-             Height="180" Width="180">
+             Height="180" Width="180"
+             VerticalAlignment="Top"
+             HorizontalAlignment="Left">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="55*"/>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="45*"/>
         </Grid.RowDefinitions>
         <Ellipse x:Name="Border" Fill="White" HorizontalAlignment="Stretch" Margin="10,10,10,10" StrokeThickness="5"  VerticalAlignment="Stretch" OpacityMask="{x:Null}" Grid.RowSpan="3">
@@ -22,7 +24,7 @@
         <TextBlock x:Name="WalletNameText" HorizontalAlignment="Center" Margin="0,0,0,0" TextWrapping="Wrap" FontWeight="ExtraBold" Foreground="DimGray" FontSize="20" VerticalAlignment="Top" TextAlignment="Center" FontFamily="Microsoft JhengHei" Grid.Row="1" >
             主錢包
         </TextBlock>
-        <TextBlock x:Name="WalletAmountText" HorizontalAlignment="Center" Margin="0,0,0,0" TextWrapping="Wrap" FontWeight="ExtraBold" Foreground="DimGray" FontSize="16" VerticalAlignment="Bottom" TextAlignment="Center" FontFamily="Bookman Old Style" Grid.Row="1" >
+        <TextBlock x:Name="WalletAmountText" HorizontalAlignment="Center" Margin="-5,0,0,0" TextWrapping="Wrap" FontWeight="ExtraBold" Foreground="DimGray" FontSize="16" VerticalAlignment="Bottom" TextAlignment="Center" FontFamily="Bookman Old Style" Grid.Row="1" >
             $1,000
         </TextBlock>
 
