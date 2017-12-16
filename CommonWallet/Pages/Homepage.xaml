@@ -4,13 +4,13 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CommonWallet"
+      xmlns:userControls="clr-namespace:CommonWallet.UserControls"
       mc:Ignorable="d" 
       d:DesignHeight="570" d:DesignWidth="800"
       Title="Homepage"
       Background="White">
 
-    <Grid>
-        <WrapPanel x:Name="WalletPanel" HorizontalAlignment="Left" Height="380" Margin="112,71,0,0" VerticalAlignment="Top" Width="380"/>
-
+    <Grid x:Name="Grid">
+        <userControls:WalletPanel x:Name="WalletPanel" Margin="0,58,0,44" BorderBrush="#FF040000" BorderThickness="1"></userControls:WalletPanel>
     </Grid>
 </Page>
