@@ -29,7 +29,6 @@ namespace CommonWallet.UserControls
 
 
         public string WalletName;
-
         public int Amount {
             get => amount;
             set
@@ -39,31 +38,34 @@ namespace CommonWallet.UserControls
             }
         }
         private int amount;
+        public readonly string Guid;
 
         private static Point StartPoint;
         public static bool IsDrag;
 
-        public Wallet(Color topColor, Color bottomColor, string name, int amount)
+        public Wallet((Color, Color) colors, string name, int amount, string guid)
         {
             InitializeComponent();
-            Border.Stroke = new LinearGradientBrush(topColor, bottomColor, new Point(0.5, 0), new Point(0.5, 1));
-            WalletNameText.Text = name;
+            Guid = guid;
             
             MouseDown += WalletOnMouseMove;
             MouseMove += WalletOnMouseMove;
             MouseDoubleClick += Wallet_MouseDoubleClick;
 
-            this.topColor = topColor;
-            this.bottomColor = bottomColor;
+            topColor = colors.Item1;
+            bottomColor = colors.Item2;
 
             Amount = amount;
             WalletName = name;
 
+            Border.Stroke = new LinearGradientBrush(topColor, bottomColor, new Point(0.5, 0), new Point(0.5, 1));
+            WalletNameText.Text = name;
         }
 
         private void Wallet_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            // TODO add wallet double click
+            var walletPage = new WalletPage(this);
+            MainWindow.Instance.NewFloatingFrame(walletPage);
         }
 
         public void DropCoin(Coin coin)

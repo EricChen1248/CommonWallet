@@ -110,9 +110,9 @@ namespace CommonWallet
         }
 
 
-        private void LoginSuccessful(Dictionary<string, string> userData, string user)
+        private void LoginSuccessful(Dictionary<string, string> userData)
         {
-            Frame.Content = new Homepage(user);
+            Frame.Content = new Homepage(userData);
         }
 
     }

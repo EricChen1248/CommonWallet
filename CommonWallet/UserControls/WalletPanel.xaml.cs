@@ -28,19 +28,24 @@ namespace CommonWallet.UserControls
             var node = new WalletPanelNode(new Point(x, y), wallet);
 
             Wallets.AddLast(node);
-            Panel.Children.Add(wallet);
-
-            DisplayWallets();
+            
         }
 
-        public void DisplayWallets()
+        public void AllignWallets()
         {
+            Panel.Children.Clear();
             foreach (var walletPanelNode in Wallets)
             {
                 var wallet = walletPanelNode.Wallet;
                 var point = walletPanelNode.Coords;
                 wallet.Margin = new Thickness((int) point.X, (int) point.Y, 0, 0);
+                Panel.Children.Add(wallet);
             }
+        }
+
+        public void ClearChildren()
+        {
+            Wallets.Clear();
         }
     }
 }

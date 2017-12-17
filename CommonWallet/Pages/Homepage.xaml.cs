@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Media;
 using CommonWallet.Class;
@@ -12,34 +13,23 @@ namespace CommonWallet.Pages
     /// </summary>
     public partial class Homepage
     {
+        public string UserName => data["Username"];
+
         public static Homepage Instance;
         public Dictionary<string, Wallet> Wallets;
 
-        private List<(Color, Color)> colors = new List<(Color, Color)>();
-        private Random rand = new Random();
-        public Homepage()
+        private readonly List<(Color, Color)> colors = new List<(Color, Color)>();
+        private readonly Dictionary<string, string> data;
+        private readonly Random rand = new Random();
+        public Homepage(Dictionary<string, string> userData)
         {
             InitializeComponent();
             Init();
             Wallets =  new Dictionary<string, Wallet>();
-
-
+            data = userData;
             Instance = this;
-            // TODO remove test Wallet Control
-            var color = GetRandomColorPair();
-            var wallet = new Wallet(color.Item1, color.Item2, "主錢包", 100000);
-            WalletPanel.AddChild(wallet);
-            Wallets.Add(wallet.WalletName, wallet);
 
-            color = GetRandomColorPair();
-            wallet = new Wallet(color.Item1, color.Item2, "歐洲旅遊", 2000);
-            WalletPanel.AddChild(wallet);
-            Wallets.Add(wallet.WalletName, wallet);
-
-            color = GetRandomColorPair();
-            wallet = new Wallet(color.Item1, color.Item2, "財金之夜", 25000);
-            WalletPanel.AddChild(wallet);
-            Wallets.Add(wallet.WalletName, wallet);
+            GetWallets();
         }
 
         private void Init()
@@ -57,5 +47,45 @@ namespace CommonWallet.Pages
         {
             return colors[rand.Next(colors.Count)];
         }
+
+        private void GetWallets()
+        {
+            var data = Server.GetDatabase("UserWallets");
+            var wallets = new HashSet<string>();
+            for (int i = 0; i < data.First().Value.Count; i++)
+            {
+                if (data["AccountName"][i] == UserName)
+                {
+                    wallets.Add(data["WalletGuid"][i]);
+                }
+            }
+
+            data = Server.GetDatabase("Wallets");
+
+
+            for (int i = 0; i < data.First().Value.Count; i++)
+            {
+                if (wallets.Contains(data["Guid"][i]))
+                {
+                    var walletData = data.Keys.ToDictionary(dataKey => dataKey, dataKey => data[dataKey][i]);
+                    var wallet = new Wallet(GetRandomColorPair(), walletData["Wallet"], int.Parse(walletData["Amount"]), walletData["Guid"] );
+                    Wallets.Add(wallet.WalletName, wallet);
+                }
+            }
+            RefreshWallets();
+        }
+
+        private void RefreshWallets()
+        {
+            WalletPanel.ClearChildren();
+
+            foreach (var wallet in Wallets.Values)
+            {
+                WalletPanel.AddChild(wallet);
+            }
+
+            WalletPanel.AllignWallets();
+        }
+
     }
 }
