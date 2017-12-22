@@ -2,7 +2,7 @@
 using System.Windows;
 using CommonWallet.Pages;
 
-namespace CommonWallet
+namespace CommonWallet.Windows
 {
     /// <summary>
     /// Interaction logic for RenameWindow.xaml
