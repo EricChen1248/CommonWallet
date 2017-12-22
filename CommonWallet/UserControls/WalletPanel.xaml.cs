@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
 using CommonWallet.Class;
 
 namespace CommonWallet.UserControls
@@ -22,7 +21,7 @@ namespace CommonWallet.UserControls
         {
             var count = Wallets.Count;
             var walletPerLine = (int) Panel.Width / TokenWidth;
-            var x = (count % walletPerLine) * TokenWidth + 50;
+            var x = count % walletPerLine * TokenWidth + 50;
             var y = count / walletPerLine * TokenHeight + count % 2 == 0 ? 50 : 100;
 
             var node = new WalletPanelNode(new Point(x, y), wallet);

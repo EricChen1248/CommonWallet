@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using CommonWallet.Class;
 using CommonWallet.DataClasses;
 using CommonWallet.Pages;
 

@@ -1,4 +1,0 @@
-﻿Guid,Wallet,Amount
-eead62bd-a756-4cd5-bd44-40d5952a19d1,主錢包,25000
-52166c1b-e80a-44fe-a7fc-bd28edf439ca,歐洲旅遊,10000
-af2ba561-0fe8-4032-9deb-0169b61168ff,財金之夜,6000

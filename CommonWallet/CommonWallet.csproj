@@ -181,6 +181,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\Database\Database.db" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -194,15 +195,6 @@
     <Resource Include="Resources\Minimize_Hover.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Database\Accounts.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Database\UserWallets.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Database\Wallets.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Resource Include="Resources\user.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,6 +1,5 @@
 ﻿using System.Drawing;
 using System.Windows;
-using System.Windows.Controls;
 using CommonWallet.Class;
 using CommonWallet.UserControls;
 using QRCoder;
