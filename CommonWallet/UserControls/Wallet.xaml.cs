@@ -28,7 +28,12 @@ namespace CommonWallet.UserControls
         private readonly Color bottomColor;
 
 
-        public string WalletName;
+        public string WalletName
+        {
+            get => WalletNameText.Text;
+            set => WalletNameText.Text = value;
+        }
+
         public int Amount {
             get => amount;
             set
@@ -59,7 +64,6 @@ namespace CommonWallet.UserControls
             WalletName = name;
 
             Border.Stroke = new LinearGradientBrush(topColor, bottomColor, new Point(0.5, 0), new Point(0.5, 1));
-            WalletNameText.Text = name;
         }
 
         private void Wallet_MouseDoubleClick(object sender, MouseButtonEventArgs e)
