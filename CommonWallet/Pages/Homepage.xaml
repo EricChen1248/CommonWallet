@@ -11,6 +11,14 @@
       Background="White">
 
     <Grid x:Name="Grid">
-        <userControls:WalletPanel x:Name="WalletPanel" Margin="0,58,0,44" BorderBrush="#FF040000" BorderThickness="1"></userControls:WalletPanel>
+        <userControls:WalletPanel x:Name="WalletPanel" Margin="0,58,0,44" BorderThickness="1" />
+        <Grid x:Name="AccountGrid" VerticalAlignment="Top" HorizontalAlignment="Right" Height="80" Width="80" Background="#FFF9F9F9" MouseEnter="AccountGrid_OnMouseEnter" MouseLeave="AccountGrid_OnMouseLeave">
+            <Ellipse HorizontalAlignment="Right" Height="60" Margin="0,10,10,0" VerticalAlignment="Top" Width="60" >
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="/CommonWallet;component/Resources/user.png"/>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Label Content="ericchen1248" HorizontalAlignment="Right" VerticalContentAlignment="Bottom" Margin="0,22,75,0" VerticalAlignment="Top" Width="185" Height="48" FontFamily="Bookman Old Style" FontSize="20" FontWeight="Bold" Foreground="#FF7A7979"/>
+        </Grid>
     </Grid>
 </Page>

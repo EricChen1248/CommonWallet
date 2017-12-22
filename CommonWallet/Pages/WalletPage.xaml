@@ -44,7 +44,7 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Button Content="轉入金額" FontFamily="Agency FB" FontSize="23" FontWeight="Bold" Foreground="Gray" HorizontalAlignment="Stretch" Margin="318,0,0,10" VerticalAlignment="Bottom" Height="33">
+            <Button Content="轉入金額" FontFamily="Agency FB" FontSize="23" FontWeight="Bold" Foreground="Gray" HorizontalAlignment="Stretch" Margin="318,0,0,10" VerticalAlignment="Bottom" Height="33" Click="ImportMoney">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background">

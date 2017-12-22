@@ -1,21 +1,16 @@
-﻿using System;
-using System.Drawing;
-using System.Security.Cryptography;
-using System.Text;
+﻿using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms;
 using CommonWallet.Class;
 using CommonWallet.UserControls;
 using QRCoder;
-using MessageBox = System.Windows.MessageBox;
 
 namespace CommonWallet.Pages
 {
     /// <summary>
     /// Interaction logic for WalletPage.xaml
     /// </summary>
-    public partial class WalletPage : Page
+    public partial class WalletPage
     {
         public Wallet Wallet;
 
@@ -40,7 +35,7 @@ namespace CommonWallet.Pages
             MoneyLabel.Content = $"{Money:C0}";
             WalletHash.Text = wallet.Guid;
 
-            using (var bitmap = GenerateQrImage(Homepage.Instance.UserName + WalletName))
+            using (var bitmap = GenerateQrImage(Wallet.Guid))
             {
                 QrImage.Source = Helper.BitmapToImageSource(bitmap);
             }
@@ -55,20 +50,11 @@ namespace CommonWallet.Pages
         {
             MainWindow.Instance.DestroyFloatingFrame();
         }
-
-        private static string GenerateGuid(string text)
-        {
-            using (var md5 = MD5.Create())
-            {
-                var hash = md5.ComputeHash(Encoding.BigEndianUnicode.GetBytes(text));
-                var guid = new Guid(hash).ToString("D");
-                return guid;
-            }
-        }
+        
 
         private void RenameButton(object sender, RoutedEventArgs e)
         {
-            using (var renameBox = new RenameWindow(WalletName))
+            using (var renameBox = new Windows.RenameWindow(WalletName))
             {
                 renameBox.ShowDialog();
                 if (renameBox.DialogResult != true) return;
@@ -76,6 +62,11 @@ namespace CommonWallet.Pages
                 WalletName = renameBox.NewName;
                 WalletLabel.Content = WalletName;
             }
+        }
+
+        private void ImportMoney(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
