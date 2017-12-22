@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LiteDB, Version=4.1.0.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiteDB.4.1.0\lib\net40\LiteDB.dll</HintPath>
+    </Reference>
     <Reference Include="QRCoder, Version=1.3.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\QRCoder.1.3.2\lib\net40\QRCoder.dll</HintPath>
     </Reference>
@@ -72,6 +75,9 @@
     <Compile Include="Class\ExtensionMethods.cs" />
     <Compile Include="Class\Helper.cs" />
     <Compile Include="Class\WalletPanelNode.cs" />
+    <Compile Include="DataClasses\AccountData.cs" />
+    <Compile Include="DataClasses\WalletData.cs" />
+    <Compile Include="DataClasses\WalletUserData.cs" />
     <Compile Include="Pages\FundsTransfer.xaml.cs">
       <DependentUpon>FundsTransfer.xaml</DependentUpon>
     </Compile>

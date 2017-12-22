@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using CommonWallet.Class;
+using CommonWallet.DataClasses;
 using CommonWallet.Pages;
 
 namespace CommonWallet.UserControls
@@ -30,38 +31,42 @@ namespace CommonWallet.UserControls
 
         public string WalletName
         {
-            get => WalletNameText.Text;
-            set => WalletNameText.Text = value;
-        }
-
-        public int Amount {
-            get => amount;
+            get => walletData.Name;
             set
             {
-                amount = value;
-                WalletAmountText.Text = $"{amount:C0}";
+                walletData.Name = value;
+                WalletNameText.Text = value; 
             }
         }
-        private int amount;
-        public readonly string Guid;
 
+        public decimal Amount {
+            get => walletData.Money;
+            set
+            {
+                walletData.Money = value;
+                WalletAmountText.Text = $"{(int)value:C0}";
+            }
+        }
+        public string Guid => walletData.Guid;
+
+        private readonly WalletData walletData;
         private static Point StartPoint;
         public static bool IsDrag;
 
-        public Wallet((Color, Color) colors, string name, int amount, string guid)
+        public Wallet((Color, Color) colors, WalletData walletData)
         {
             InitializeComponent();
-            Guid = guid;
-            
+            this.walletData = walletData;
+            WalletAmountText.Text = $"{(int)Amount:C0}";
+            WalletNameText.Text = WalletName;
+
             MouseDown += WalletOnMouseMove;
             MouseMove += WalletOnMouseMove;
             MouseDoubleClick += Wallet_MouseDoubleClick;
 
             topColor = colors.Item1;
             bottomColor = colors.Item2;
-
-            Amount = amount;
-            WalletName = name;
+           
 
             Border.Stroke = new LinearGradientBrush(topColor, bottomColor, new Point(0.5, 0), new Point(0.5, 1));
         }
@@ -74,11 +79,11 @@ namespace CommonWallet.UserControls
 
         public void DropCoin(Coin coin)
         {
-            if (coin.WalletName == WalletName)
+            if (Equals(coin.Wallet, this))
             {
                 return;
             }
-            MainWindow.Instance.NewFloatingFrame(new FundsTransfer(coin.WalletName, coin.WalleyMoney, WalletName, Amount));
+            MainWindow.Instance.NewFloatingFrame(new FundsTransfer(coin.Wallet, this));
         }
 
         private void WalletOnMouseMove(object sender, MouseEventArgs mouseEventArgs)
@@ -110,14 +115,14 @@ namespace CommonWallet.UserControls
 
         private void GenerateCoin(Wallet sender, Point mousePosition)
         {
-            var coin = new Coin(topColor, bottomColor, sender.WalletName, sender.Amount);
+            var coin = new Coin(topColor, bottomColor, this);
             Homepage.Instance.Grid.Children.Add(coin);
             coin.VerticalAlignment = VerticalAlignment.Top;
             coin.HorizontalAlignment = HorizontalAlignment.Left;
             coin.Margin = new Thickness(mousePosition.X - coin.Width / 2, mousePosition.Y - coin.Height / 2, 0, 0);
         }
 
-        public void UpdateAmount(int newAmount)
+        public void UpdateAmount(decimal newAmount)
         {
             Amount = newAmount;
         }

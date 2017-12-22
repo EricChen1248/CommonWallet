@@ -2,6 +2,8 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using CommonWallet.Class;
+using CommonWallet.DataClasses;
 using CommonWallet.Pages;
 
 namespace CommonWallet
@@ -18,7 +20,7 @@ namespace CommonWallet
             InitializeComponent();
             Frame.Navigated += Frame_Navigated;
             InitTitleBar();
-
+            
             Frame.Content = new Login(LoginSuccessful);
             Instance = this;
         }
@@ -110,9 +112,9 @@ namespace CommonWallet
         }
 
 
-        private void LoginSuccessful(Dictionary<string, string> userData)
+        private void LoginSuccessful(AccountData account)
         {
-            Frame.Content = new Homepage(userData);
+            Frame.Content = new Homepage(account);
         }
 
     }

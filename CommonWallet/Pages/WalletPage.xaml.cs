@@ -20,7 +20,7 @@ namespace CommonWallet.Pages
             private set => Wallet.WalletName = value;
         }
 
-        public int Money
+        public decimal Money
         {
             get => Wallet.Amount;
             private set => Wallet.Amount = value;

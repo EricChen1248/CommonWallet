@@ -16,15 +16,13 @@ namespace CommonWallet.UserControls
     public partial class Coin
     {
         public static Coin Instance;
-        public string WalletName;
-        public int WalleyMoney;
+        public Wallet Wallet;
         private static DispatcherTimer Timer;
-        
-        public Coin(Color topColor, Color bottomColor, string walletName, int walletMoney)
+
+        public Coin(Color topColor, Color bottomColor, Wallet wallet)
         {
             InitializeComponent();
-            WalletName = walletName;
-            WalleyMoney = walletMoney;
+            Wallet = wallet;
             CoinFill.Fill = new LinearGradientBrush(topColor, bottomColor, new Point(0.5,0), new Point(0.5,1));
             
             CoinFill.MouseLeftButtonUp += CoinFill_MouseLeftButtonUp;

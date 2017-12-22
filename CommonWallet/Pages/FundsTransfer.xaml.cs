@@ -1,19 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using CommonWallet.Class.Exceptions;
+using CommonWallet.UserControls;
 
 namespace CommonWallet.Pages
 {
@@ -22,30 +10,29 @@ namespace CommonWallet.Pages
     /// </summary>
     public partial class FundsTransfer
     {
-        private string walletName1;
-        private string walletName2;
-        private int walletMoney1;
-        private int walletMoney2;
+        private readonly Wallet wallet1;
+        private readonly Wallet wallet2;
+
+        private decimal WalletMoney1 => wallet1.Amount;
+        private decimal WalletMoney2 => wallet2.Amount;
 
         private int transfer;
         private bool paymentToggle;
 
-        public FundsTransfer(string name1, int money1, string name2, int money2)
+        public FundsTransfer(Wallet wallet1, Wallet wallet2)
         {
             InitializeComponent();
-            walletName1 = name1;
-            walletName2 = name2;
-            walletMoney1 = money1;
-            walletMoney2 = money2;
+            this.wallet1 = wallet1;
+            this.wallet2 = wallet2;
 
-            Namel1Label.Content = name1;
-            Namel2Label.Content = name2;
+            Namel1Label.Content = wallet1.Name;
+            Namel2Label.Content = wallet2.Name;
 
-            Money1Label.Content = $"{walletMoney1:C0}";
-            Money2Label.Content = $"{walletMoney2:C0}";
+            Money1Label.Content = $"{WalletMoney1:C0}";
+            Money2Label.Content = $"{WalletMoney2:C0}";
 
-            NewMoney1Label.Content = $"{walletMoney1:C0}";
-            NewMoney2Label.Content = $"{walletMoney2:C0}";
+            NewMoney1Label.Content = $"{WalletMoney1:C0}";
+            NewMoney2Label.Content = $"{WalletMoney2:C0}";
         }
 
         private void TextBoxBase_OnTextChanged(object sender, TextChangedEventArgs e)
@@ -67,8 +54,8 @@ namespace CommonWallet.Pages
 
         private void UpdateLabels()
         {
-            NewMoney1Label.Content = $"{walletMoney1 + transfer * (paymentToggle ? 1 : -1):C0}";
-            NewMoney2Label.Content = $"{walletMoney2 - transfer * (paymentToggle ? 1 : -1):C0}";
+            NewMoney1Label.Content = $"{WalletMoney1 + transfer * (paymentToggle ? 1 : -1):C0}";
+            NewMoney2Label.Content = $"{WalletMoney2 - transfer * (paymentToggle ? 1 : -1):C0}";
 
         }
 
@@ -83,16 +70,16 @@ namespace CommonWallet.Pages
         {
             try
             {
-                if (walletMoney1 + transfer * (paymentToggle ? 1 : -1) < 0)
+                if (WalletMoney1 + transfer * (paymentToggle ? 1 : -1) < 0)
                 {
-                    throw new NotEnoughMoneyException(walletName1);
+                    throw new NotEnoughMoneyException(wallet1.WalletName);
                 }
-                if (walletMoney2 - transfer * (paymentToggle ? 1 : -1) < 0)
+                if (WalletMoney2 - transfer * (paymentToggle ? 1 : -1) < 0)
                 {
-                    throw new NotEnoughMoneyException(walletName2);
+                    throw new NotEnoughMoneyException(wallet2.WalletName);
                 }
-                Homepage.Instance.Wallets[walletName1].UpdateAmount(walletMoney1 + transfer * (paymentToggle ? 1 : -1));
-                Homepage.Instance.Wallets[walletName2].UpdateAmount(walletMoney2 - transfer * (paymentToggle ? 1 : -1));
+                wallet1.UpdateAmount(WalletMoney1 + transfer * (paymentToggle ? 1 : -1));
+                wallet2.UpdateAmount(WalletMoney2 - transfer * (paymentToggle ? 1 : -1));
 
                 MainWindow.Instance.DestroyFloatingFrame();
             }

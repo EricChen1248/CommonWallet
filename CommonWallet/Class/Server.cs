@@ -1,9 +1,11 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using CommonWallet.Class.Exceptions;
+using CommonWallet.DataClasses;
 using CommonWallet.Properties;
+using LiteDB;
 
 namespace CommonWallet.Class
 {
@@ -12,13 +14,14 @@ namespace CommonWallet.Class
     /// </summary>
     internal static class Server
     {
-        private const string ServerLocation = "Resources/Database/";
+        private const string ServerLocation = "Resources/Database/Database.db";
 
         /// <summary>
         /// Pulls the data from file in a Dictionary of Lists with headers as keys
         /// </summary>
         /// <param name="dataBaseName"></param>
         /// <returns></returns>
+        [Obsolete]
         public static Dictionary<string, List<string>> GetDatabase(string dataBaseName)
         {
             var results = new Dictionary<string, List<string>>();
@@ -56,50 +59,63 @@ namespace CommonWallet.Class
 
             return results;
         }
+        
 
-        /// <summary>
-        /// Saves data to dataFile with the original data. Order doesn't matter as headers are hashed.
-        /// </summary>
-        /// <param name="dataBaseName"></param>
-        /// <param name="data"></param>
-        /// <returns></returns>
-        public static bool SaveToDatabase(string dataBaseName, Dictionary<string, List<string>> data)
+        public static IEnumerable<WalletData> GetUserWallets(string userName)
         {
-            var headers = data.Select(pair => pair.Key).ToList();
-
-            // Add headers to dataFile holder
-            var dataFile = headers.Aggregate("", (current, header) => current + (header + ","));
-            dataFile += "\n";
-
-
-            // Add line by line in order of headers to dataFile holder
-            for (var i = 0; i < data[headers[0]].Count; i++)
+            using (var db = new LiteDatabase(ServerLocation))
             {
-                dataFile = headers.Aggregate(dataFile, (current, header) => current + (data[header][i] + ","));
-                dataFile += "\n";
+                var walletsGuid = db.GetCollection<WalletUserData>("UserWallets").Find(x => x.AccountName == userName).Select(x => x.WalletGuid).ToHashSet();
+                return db.GetCollection<WalletData>("Wallets").Find(x => walletsGuid.Contains(x.Guid)).Select(x => x).ToList();
             }
+        }
 
-            var attempts = 0;
-            while (attempts < 10)
+        public static WalletData GetWalletData(string walletGuid)
+        {
+            using (var db = new LiteDatabase(ServerLocation))
             {
-                try
-                {
+                return db.GetCollection<WalletData>("Wallets").Find(x => x.Guid == walletGuid).FirstOrDefault();
+            }
+        }
 
-                    using (var sw = new StreamWriter(ServerLocation + dataBaseName + ".txt", false))
-                    {
-                        sw.Write(dataFile);
-                    }
+        public static AccountData GetAccountData(string userName)
+        {
+            using (var db = new LiteDatabase(ServerLocation))
+            {
+                return db.GetCollection<AccountData>("Accounts").Find(x => x.UserName == userName).FirstOrDefault();
+            }   
+        }
+        
+        public static void AddWallet(string accountName, WalletData walletData)
+        {
+            var userWallet = new WalletUserData
+            {
+                AccountName = accountName,
+                WalletGuid = walletData.Guid
+            };
 
-                    return true;
-                }
-                catch (IOException)
+            using (var db = new LiteDatabase(ServerLocation))
+            {
+                var userWallets = db.GetCollection<WalletUserData>("UserWallets");
+                userWallets.Insert(userWallet);
+
+                var wallets = db.GetCollection<WalletData>("Wallets");
+                wallets.Insert(walletData);
+            }
+        }
+
+        public static void UpdateData<T>(T account, string tableName, string indexOn)
+        {
+            using (var db = new LiteDatabase(ServerLocation))
+            {
+                var accountsDb = db.GetCollection<T>(tableName);
+                accountsDb.Update(account);
+
+                if (indexOn != null)
                 {
-                    ++attempts;
-                    Console.WriteLine($"{0} IO Error, attempt number: {1}", ServerLocation + dataBaseName, attempts);
+                    accountsDb.EnsureIndex(indexOn);
                 }
             }
-
-            return false;
         }
     }
 }

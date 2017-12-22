@@ -6,7 +6,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 using CommonWallet.Class;
+using CommonWallet.DataClasses;
 using CommonWallet.UserControls;
+using LiteDB;
 
 namespace CommonWallet.Pages
 {
@@ -15,20 +17,22 @@ namespace CommonWallet.Pages
     /// </summary>
     public partial class Homepage
     {
-        public string UserName => data["Username"];
+        public string UserName => account.UserName;
 
         public static Homepage Instance;
         public Dictionary<string, Wallet> Wallets;
 
         private readonly List<(Color, Color)> colors = new List<(Color, Color)>();
-        private readonly Dictionary<string, string> data;
+        private readonly AccountData account;
         private readonly Random rand = new Random();
-        public Homepage(Dictionary<string, string> userData)
+        public Homepage(AccountData account)
         {
             InitializeComponent();
             Init();
             Wallets =  new Dictionary<string, Wallet>();
-            data = userData;
+
+            this.account = account;
+
             Instance = this;
 
             GetWallets();
@@ -52,27 +56,11 @@ namespace CommonWallet.Pages
 
         private void GetWallets()
         {
-            var data = Server.GetDatabase("UserWallets");
-            var wallets = new HashSet<string>();
-            for (int i = 0; i < data.First().Value.Count; i++)
+            var walletsList = Server.GetUserWallets(account.UserName);
+            foreach (var data in walletsList)
             {
-                if (data["AccountName"][i] == UserName)
-                {
-                    wallets.Add(data["WalletGuid"][i]);
-                }
-            }
-
-            data = Server.GetDatabase("Wallets");
-
-
-            for (int i = 0; i < data.First().Value.Count; i++)
-            {
-                if (wallets.Contains(data["Guid"][i]))
-                {
-                    var walletData = data.Keys.ToDictionary(dataKey => dataKey, dataKey => data[dataKey][i]);
-                    var wallet = new Wallet(GetRandomColorPair(), walletData["Wallet"], int.Parse(walletData["Amount"]), walletData["Guid"] );
-                    Wallets.Add(wallet.WalletName, wallet);
-                }
+                var wallet = new Wallet(GetRandomColorPair(), data );
+                Wallets.Add(wallet.WalletName, wallet);
             }
             RefreshWallets();
         }

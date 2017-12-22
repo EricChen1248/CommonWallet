@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using CommonWallet.Class;
+using CommonWallet.DataClasses;
 
 namespace CommonWallet.Pages
 {
@@ -13,8 +14,8 @@ namespace CommonWallet.Pages
     /// </summary>
     public partial class Login
     {
-        private readonly Action<Dictionary<string,string>> loginSuccessful;
-        public Login(Action<Dictionary<string, string>> login)
+        private readonly Action<AccountData> loginSuccessful;
+        public Login(Action<AccountData> login)
         {
             InitializeComponent();
             loginSuccessful = login;
@@ -49,34 +50,17 @@ namespace CommonWallet.Pages
             // Hashing Password with SHA1
             var hashedPassword = new ASCIIEncoding().GetString(new SHA1CryptoServiceProvider().ComputeHash(Encoding.ASCII.GetBytes(PasswordBox.Password)));
 
-
-            var data = Server.GetDatabase("Accounts");
-            var users = data["Username"];
-
             var userName = UserBox.Text.ToLower();
-            if (users.Contains(userName) == false)
-            {
-                FailedLogin();
-                MessageBox.Show(users[0]);
-                return;
-            }
+            var dataBaseAccount = Server.GetAccountData(userName);
 
-
-            var index = userName.IndexOf(userName, StringComparison.Ordinal);
-            if (data["Password"][index] != hashedPassword)
+            dataBaseAccount.Password = hashedPassword;
+            if (dataBaseAccount.Password != hashedPassword)
             {
                 FailedLogin();
                 return;
             }
 
-
-            var userData = new Dictionary<string, string>();
-            foreach (var dataKey in data.Keys)
-            {
-                userData[dataKey] = data[dataKey][index];
-            }
-
-            loginSuccessful(userData);
+            loginSuccessful(dataBaseAccount);
 
         }
     }
