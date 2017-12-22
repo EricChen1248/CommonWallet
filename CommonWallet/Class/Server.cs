@@ -4,11 +4,12 @@ using System.IO;
 using System.Linq;
 using CommonWallet.Class.Exceptions;
 using CommonWallet.DataClasses;
-using CommonWallet.Properties;
 using LiteDB;
 
 namespace CommonWallet.Class
 {
+    // Reference: http://www.litedb.org/
+
     /// <summary>
     /// Handles file IO for our database.
     /// </summary>
