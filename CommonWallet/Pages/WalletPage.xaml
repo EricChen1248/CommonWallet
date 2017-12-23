@@ -44,7 +44,7 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Button Content="轉入金額" FontFamily="Agency FB" FontSize="23" FontWeight="Bold" Foreground="Gray" HorizontalAlignment="Stretch" Margin="318,0,0,10" VerticalAlignment="Bottom" Height="33" Click="ImportMoney">
+            <Button Content="轉入金額" FontFamily="Agency FB" FontSize="23" FontWeight="Bold" Foreground="Gray" HorizontalAlignment="Stretch" Margin="318,0,0,10" VerticalAlignment="Bottom" Height="33" Click="ImportMoney" Background="#FFDEDEDE">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background">
@@ -74,7 +74,65 @@
                 </Button.Style>
             </Button>
             <TextBox x:Name="WalletHash" HorizontalAlignment="Left" Height="22" Margin="10,466,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="273" VerticalContentAlignment="Center" IsReadOnly="True"/>
-            <Button Content="重新命名" FontFamily="Agency FB" FontSize="23" FontWeight="Bold" Foreground="Gray" HorizontalAlignment="Stretch" Margin="318,0,0,53" VerticalAlignment="Bottom" Height="33" Click="RenameButton">
+            <Button Content="重新命名" FontFamily="Agency FB" FontSize="23" FontWeight="Bold" Foreground="Gray" HorizontalAlignment="Stretch" Margin="318,0,0,53" VerticalAlignment="Bottom" Height="33" Click="RenameButton" Background="#FFDEDEDE">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <Brush>#FFE2E2E2</Brush>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <Brush>#FFD2D2D2</Brush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button Content="加入用戶" FontFamily="Agency FB" FontSize="23" FontWeight="Bold" Foreground="Gray" HorizontalAlignment="Stretch" Margin="318,0,0,96" VerticalAlignment="Bottom" Height="33" Click="RenameButton" Background="#FFDEDEDE">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <Brush>#FFE2E2E2</Brush>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <Brush>#FFD2D2D2</Brush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button Content="查看歷史" FontFamily="Agency FB" FontSize="23" FontWeight="Bold" Foreground="Gray" HorizontalAlignment="Stretch" Margin="318,0,0,139" VerticalAlignment="Bottom" Height="33" Click="HistoryBtn_Click" Background="#FFDEDEDE">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background">

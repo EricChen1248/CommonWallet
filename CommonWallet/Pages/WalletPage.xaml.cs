@@ -67,5 +67,10 @@ namespace CommonWallet.Pages
         {
 
         }
+
+        private void HistoryBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.Instance.NewFloatingFrame(new History(Server.GetHistory(Wallet.Guid), this));
+        }
     }
 }

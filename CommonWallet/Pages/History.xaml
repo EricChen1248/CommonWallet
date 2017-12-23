@@ -1,0 +1,23 @@
+﻿<Page x:Class="CommonWallet.Pages.History"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CommonWallet.Pages"
+      mc:Ignorable="d" 
+      Height="500" 
+      Width="500"
+      Background ="White"
+      Title="History">
+
+    <Grid>
+        <DataGrid x:Name="HistoryTable" HorizontalAlignment="Left" Height="448" VerticalAlignment="Top" Width="500" Margin="0,52,0,0" AutoGenerateColumns="False" DataContext="HistoryData">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Username}" Header="使用者"/>
+                <DataGridTextColumn Binding="{Binding Amount, StringFormat=C0}" Header="金額" />
+                <DataGridTextColumn Binding="{Binding DateTime}" Header="時間"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Page>

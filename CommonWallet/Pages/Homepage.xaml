@@ -12,13 +12,134 @@
 
     <Grid x:Name="Grid">
         <userControls:WalletPanel x:Name="WalletPanel" Margin="0,58,0,44" BorderThickness="1" />
-        <Grid x:Name="AccountGrid" VerticalAlignment="Top" HorizontalAlignment="Right" Height="80" Width="80" Background="#FFF9F9F9" MouseEnter="AccountGrid_OnMouseEnter" MouseLeave="AccountGrid_OnMouseLeave">
+        <Grid x:Name="AccountGrid" VerticalAlignment="Top" HorizontalAlignment="Right" Height="80" Width="80" Background="#FFF0F0F0" MouseEnter="AccountGrid_OnMouseEnter" MouseLeave="AccountGrid_OnMouseLeave">
             <Ellipse HorizontalAlignment="Right" Height="60" Margin="0,10,10,0" VerticalAlignment="Top" Width="60" >
                 <Ellipse.Fill>
                     <ImageBrush ImageSource="/CommonWallet;component/Resources/user.png"/>
                 </Ellipse.Fill>
             </Ellipse>
             <Label Content="ericchen1248" HorizontalAlignment="Right" VerticalContentAlignment="Bottom" Margin="0,22,75,0" VerticalAlignment="Top" Width="185" Height="48" FontFamily="Bookman Old Style" FontSize="20" FontWeight="Bold" Foreground="#FF7A7979"/>
+            <Button Content="帳戶設定" FontFamily="Agency FB" FontSize="23" FontWeight="Bold" Foreground="Gray" HorizontalAlignment="Right" Margin="0,105,168,0" VerticalAlignment="Top" Height="33">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <Brush>#FFF0F0F0</Brush>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <Brush>#FFD2D2D2</Brush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button Content="登出" FontFamily="Agency FB" FontSize="23" FontWeight="Bold" Foreground="Gray" HorizontalAlignment="Right" Margin="0,165,214,0" VerticalAlignment="Top" Height="33">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <Brush>#FFF0F0F0</Brush>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <Brush>#FFD2D2D2</Brush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
         </Grid>
+        <Button Content="+ 新增錢包" FontFamily="Agency FB" FontSize="23" FontWeight="Bold" Foreground="Gray" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Height="44" HorizontalContentAlignment="Center" Width="126" Click="AddWalletBtn_Click">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush>#FFE2E2E2</SolidColorBrush>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <Brush>#FFD2D2D2</Brush>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button FontFamily="Agency FB" FontSize="23" FontWeight="Bold" Foreground="Gray" HorizontalAlignment="Right" Margin="0,0,148,10" VerticalAlignment="Bottom" Height="44" HorizontalContentAlignment="Center" Width="43" BorderBrush="#FFE8E8E8">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush>#FFE2E2E2</SolidColorBrush>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <Brush>#FFD2D2D2</Brush>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Ellipse HorizontalAlignment="Center" Height="38" VerticalAlignment="Top" Width="38" Margin="3,0,0,0">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="/CommonWallet;component/Resources/refresh-page-option.png"/>
+                </Ellipse.Fill>
+            </Ellipse>
+        </Button>
     </Grid>
 </Page>

@@ -24,11 +24,12 @@ namespace CommonWallet.UserControls
             set
             {
                 walletData.Name = value;
-                WalletNameText.Text = value; 
+                WalletNameText.Text = value;
             }
         }
 
-        public decimal Amount {
+        public decimal Amount
+        {
             get => walletData.Money;
             set
             {
@@ -55,7 +56,7 @@ namespace CommonWallet.UserControls
 
             topColor = colors.Item1;
             bottomColor = colors.Item2;
-           
+
 
             Border.Stroke = new LinearGradientBrush(topColor, bottomColor, new Point(0.5, 0), new Point(0.5, 1));
         }
@@ -93,7 +94,7 @@ namespace CommonWallet.UserControls
             }
             else
             {
-                GenerateCoin((Wallet) sender, mouseEventArgs.GetPosition(Homepage.Instance.Grid));
+                GenerateCoin((Wallet)sender, mouseEventArgs.GetPosition(Homepage.Instance.Grid));
             }
         }
 

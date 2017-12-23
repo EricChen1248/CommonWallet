@@ -60,7 +60,14 @@ namespace CommonWallet.Class
 
             return results;
         }
-        
+
+        public static IEnumerable<HistoryData> GetHistory(string walletGuid)
+        {
+            using (var db = new LiteDatabase(ServerLocation))
+            {
+                return db.GetCollection<HistoryData>("TransactionHistory").Find(Query.EQ("WalletGuid", walletGuid)).ToList();
+            }
+        }
 
         public static IEnumerable<WalletData> GetUserWallets(string userName)
         {
@@ -116,6 +123,17 @@ namespace CommonWallet.Class
                 {
                     accountsDb.EnsureIndex(indexOn);
                 }
+            }
+        }
+
+        public static void WriteTransaction(HistoryData historyData)
+        {
+            using (var db = new LiteDatabase(ServerLocation))
+            {
+                var history = db.GetCollection<HistoryData>("TransactionHistory");
+                history.Insert(historyData);
+                history.EnsureIndex("WalletGuid");
+
             }
         }
     }

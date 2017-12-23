@@ -76,13 +76,26 @@
     <Compile Include="Class\Helper.cs" />
     <Compile Include="Class\WalletPanelNode.cs" />
     <Compile Include="DataClasses\AccountData.cs" />
+    <Compile Include="DataClasses\HistoryData.cs" />
     <Compile Include="DataClasses\WalletData.cs" />
     <Compile Include="DataClasses\WalletUserData.cs" />
     <Compile Include="Pages\FundsTransfer.xaml.cs">
       <DependentUpon>FundsTransfer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\History.xaml.cs">
+      <DependentUpon>History.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\NewWallet.xaml.cs">
+      <DependentUpon>NewWallet.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\WalletPage.xaml.cs">
       <DependentUpon>WalletPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Lister.xaml.cs">
+      <DependentUpon>Lister.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ListerNode.xaml.cs">
+      <DependentUpon>ListerNode.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\ImportWindow.xaml.cs">
       <DependentUpon>ImportWindow.xaml</DependentUpon>
@@ -102,6 +115,10 @@
     <Page Include="Pages\FundsTransfer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\History.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\Homepage.xaml">
       <SubType>Designer</SubType>
@@ -130,9 +147,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Pages\NewWallet.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\WalletPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Lister.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\ListerNode.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\ImportWindow.xaml">
       <SubType>Designer</SubType>
@@ -196,6 +225,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\refresh-page-option.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
