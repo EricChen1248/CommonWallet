@@ -3,13 +3,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:CommonWallet.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Border BorderBrush="Black" CornerRadius="3,3,3,3">
-        <Grid Background="White">
-
-
-        </Grid>
-    </Border>
+             Height="30" 
+             Width="127.5">
+    <Grid>
+        <Border BorderBrush="LightGray" BorderThickness="0.2" CornerRadius="15,15,15,15" Background="#FFF6F6F6">
+            <Grid Background="#FFF6F6F6" Margin="5,5,5,5">
+                <Button x:Name="CloseBtn" Content="✖" HorizontalAlignment="Right" Margin="0,0,0,0" Width="21.5" BorderBrush="{x:Null}" Background="#FFF6F6F6" FontSize="14" Click="CloseBtn_OnClick">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Foreground" Value="#FF8B8B8B"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Foreground" Value="#FF424242"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <TextBlock x:Name="NameBlock" TextWrapping="NoWrap" VerticalAlignment="Stretch" Text="beckymark958" FontFamily="Microsoft Jhenghei" Foreground="#FF767575" FontSize="14" Margin="0,0,22,0"/>
+            </Grid>
+        </Border>
+    </Grid>
 </UserControl>

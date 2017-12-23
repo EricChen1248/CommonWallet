@@ -1,28 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using CommonWallet.Class;
 
 namespace CommonWallet.UserControls
 {
     /// <summary>
     /// Interaction logic for ListerNode.xaml
     /// </summary>
-    public partial class ListerNode : UserControl
+    public partial class ListerNode
     {
-        public ListerNode()
+        public readonly object Data;
+        private readonly Lister parent;
+        public ListerNode(object data, string name, Lister parentLister)
         {
             InitializeComponent();
+            Data = data;
+            parent = parentLister;
+            NameBlock.Text = name;
+            Width = NameBlock.RequiredSize().width + 38;
+            Height = 30;
+        }
+
+        private void CloseBtn_OnClick(object sender, RoutedEventArgs e)
+        {
+            parent.RemoveNode(this);
         }
     }
 }

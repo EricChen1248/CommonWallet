@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace CommonWallet.Class
@@ -16,6 +19,18 @@ namespace CommonWallet.Class
             IEqualityComparer<T> comparer = null)
         {
             return new HashSet<T>(source, comparer);
+        }
+
+        public static (double width, double height) RequiredSize(this TextBlock textBlock)
+        {
+            var formattedText = new FormattedText(textBlock.Text,
+                CultureInfo.CurrentCulture,
+                FlowDirection.LeftToRight,
+                new Typeface(textBlock.FontFamily, textBlock.FontStyle, textBlock.FontWeight, textBlock.FontStretch),
+                textBlock.FontSize, null, new NumberSubstitution(),
+                TextFormattingMode.Ideal);
+
+            return (formattedText.Width, formattedText.Height);
         }
     }
     

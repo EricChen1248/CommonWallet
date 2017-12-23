@@ -23,6 +23,8 @@ namespace CommonWallet.Pages
         private readonly List<(Color, Color)> colors = new List<(Color, Color)>();
         private readonly AccountData account;
         private readonly Random rand = new Random();
+
+
         public Homepage(AccountData account)
         {
             InitializeComponent();
@@ -116,7 +118,7 @@ namespace CommonWallet.Pages
 
         private void AddWalletBtn_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            MainWindow.Instance.NewFloatingFrame(new NewWallet());
         }
     }
 }
