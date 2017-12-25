@@ -32,6 +32,7 @@ namespace CommonWallet.Pages
             Wallets =  new Dictionary<string, Wallet>();
 
             Account = account;
+            AccountNameLabel.Content = Account.AccountName;
 
             Instance = this;
 

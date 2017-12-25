@@ -42,7 +42,7 @@
                     <ImageBrush ImageSource="/CommonWallet;component/Resources/user.png"/>
                 </Ellipse.Fill>
             </Ellipse>
-            <Label Content="ericchen1248" HorizontalAlignment="Right" VerticalContentAlignment="Bottom" Margin="0,22,75,0" VerticalAlignment="Top" Width="185" Height="48" FontFamily="Bookman Old Style" FontSize="20" FontWeight="Bold" Foreground="#FF7A7979"/>
+            <Label x:Name="AccountNameLabel" Content="ericchen1248" HorizontalAlignment="Right" VerticalContentAlignment="Bottom" Margin="0,22,75,0" VerticalAlignment="Top" Width="185" Height="48" FontFamily="Bookman Old Style" FontSize="20" FontWeight="Bold" Foreground="#FF7A7979"/>
             <Button Content="帳戶設定" FontFamily="Agency FB" FontSize="23" FontWeight="Bold" Foreground="Gray" HorizontalAlignment="Right" Margin="0,105,168,0" VerticalAlignment="Top" Height="33">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">

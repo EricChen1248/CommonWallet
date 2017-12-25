@@ -31,7 +31,7 @@ namespace CommonWallet.Class
             using (var db = new LiteDatabase(ServerLocation))
             {
                 var walletsGuid = db.GetCollection<WalletUserData>("UserWallets").Find(x => x.UserName == userName).Select(x => x.WalletGuid).ToHashSet();
-                return db.GetCollection<WalletData>("Wallets").Find(x => walletsGuid.Contains(x.Guid)).Select(x => x).ToList();
+                return db.GetCollection<WalletData>("Wallets").Find(x => walletsGuid.Contains(x.Guid)).ToList();
             }
         }
 
