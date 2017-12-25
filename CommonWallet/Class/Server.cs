@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Principal;
 using CommonWallet.Class.Exceptions;
 using CommonWallet.DataClasses;
 using LiteDB;
@@ -17,50 +18,6 @@ namespace CommonWallet.Class
     {
         private const string ServerLocation = "Resources/Database/Database.db";
 
-        /// <summary>
-        /// Pulls the data from file in a Dictionary of Lists with headers as keys
-        /// </summary>
-        /// <param name="dataBaseName"></param>
-        /// <returns></returns>
-        [Obsolete]
-        public static Dictionary<string, List<string>> GetDatabase(string dataBaseName)
-        {
-            var results = new Dictionary<string, List<string>>();
-            using( var sr = new StreamReader(ServerLocation + dataBaseName + ".txt"))
-            {
-                // Read in headers for database
-                var firstLine = sr.ReadLine()?.Split(',');
-                var headers = new List<string>();
-
-                if (firstLine == null)
-                    throw new DatabaseError();
-                foreach (var s in firstLine)
-                {
-                    if (s == "")
-                        continue;
-
-                    results[s] = new List<string>();
-                    headers.Add(s);
-                }
-
-                // Read in the rest of database until end
-                while (sr.EndOfStream == false)
-                {
-                    var line = sr.ReadLine()?.Split(',');
-
-                    for (var i = 0; i < headers.Count; i++)
-                    {
-                        if (line == null)
-                            throw new DatabaseError();
-
-                        results[headers[i]].Add(line[i]);
-                    }
-                }
-            }
-
-            return results;
-        }
-
         public static IEnumerable<HistoryData> GetHistory(string walletGuid)
         {
             using (var db = new LiteDatabase(ServerLocation))
@@ -73,11 +30,18 @@ namespace CommonWallet.Class
         {
             using (var db = new LiteDatabase(ServerLocation))
             {
-                var walletsGuid = db.GetCollection<WalletUserData>("UserWallets").Find(x => x.AccountName == userName).Select(x => x.WalletGuid).ToHashSet();
+                var walletsGuid = db.GetCollection<WalletUserData>("UserWallets").Find(x => x.UserName == userName).Select(x => x.WalletGuid).ToHashSet();
                 return db.GetCollection<WalletData>("Wallets").Find(x => walletsGuid.Contains(x.Guid)).Select(x => x).ToList();
             }
         }
 
+        public static IEnumerable<WalletUserData> GetUsersOfWallet(string walletGuid)
+        {
+            using (var db = new LiteDatabase(ServerLocation))
+            {
+                return db.GetCollection<WalletUserData>("UserWallets").Find(x => x.WalletGuid == walletGuid).ToList();
+            }
+        }
         public static WalletData GetWalletData(string walletGuid)
         {
             using (var db = new LiteDatabase(ServerLocation))
@@ -98,7 +62,7 @@ namespace CommonWallet.Class
         {
             var userWallet = new WalletUserData
             {
-                AccountName = accountName,
+                UserName = accountName,
                 WalletGuid = walletData.Guid
             };
 
@@ -112,16 +76,16 @@ namespace CommonWallet.Class
             }
         }
 
-        public static void UpdateData<T>(T account, string tableName, string indexOn)
+        public static void UpdateData<T>(T data, string tableName, string indexOn)
         {
             using (var db = new LiteDatabase(ServerLocation))
             {
-                var accountsDb = db.GetCollection<T>(tableName);
-                accountsDb.Update(account);
+                var table = db.GetCollection<T>(tableName);
+                table.Update(data);
 
                 if (indexOn != null)
                 {
-                    accountsDb.EnsureIndex(indexOn);
+                    table.EnsureIndex(indexOn);
                 }
             }
         }
@@ -134,6 +98,28 @@ namespace CommonWallet.Class
                 history.Insert(historyData);
                 history.EnsureIndex("WalletGuid");
 
+            }
+        }
+
+        public static void AddWalletUsers(IEnumerable<AccountData> accounts, string walletGuid)
+        {
+            if (!(accounts is IList<AccountData> accountDatas)) return;
+
+            using (var db = new LiteDatabase(ServerLocation))
+            {
+                var data =
+                    from account in accountDatas
+                    select new WalletUserData
+                    {
+                        UserName = account.AccountName,
+                        WalletGuid = walletGuid
+                    };
+
+                var table = db.GetCollection<WalletUserData>("UserWallets");
+                table.InsertBulk(data);
+
+                table.EnsureIndex(x => x.UserName);
+                table.EnsureIndex(x => x.WalletGuid);
             }
         }
     }
