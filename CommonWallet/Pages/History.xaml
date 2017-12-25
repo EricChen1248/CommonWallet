@@ -11,13 +11,44 @@
       Title="History">
 
     <Grid>
-        <DataGrid x:Name="HistoryTable" HorizontalAlignment="Left" Height="448" VerticalAlignment="Top" Width="500" Margin="0,52,0,0" AutoGenerateColumns="False" DataContext="HistoryData">
+        <Rectangle x:Name="TitleBar" Fill="#FF686868" Margin="0,0,0,470" />
+
+        <DataGrid x:Name="HistoryTable" HorizontalAlignment="Left" Height="470" VerticalAlignment="Top" Width="500" Margin="0,30,0,0" AutoGenerateColumns="False" DataContext="HistoryData">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Username}" Header="使用者"/>
                 <DataGridTextColumn Binding="{Binding Amount, StringFormat=C0}" Header="金額" />
                 <DataGridTextColumn Binding="{Binding DateTime}" Header="時間"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Button Grid.Row="0" x:Name="CloseBtn" HorizontalAlignment="Right" Height="30" Margin="0,0,0,470" Width="40" BorderBrush="{x:Null}" Foreground="{x:Null}" Click ="CloseBtn_OnClick" >
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="/CommonWallet;component/Resources/CloseBtn.png"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="/CommonWallet;component/Resources/CloseBtn_Hover.png"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
 
     </Grid>
 </Page>

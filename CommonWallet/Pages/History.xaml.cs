@@ -22,5 +22,9 @@ namespace CommonWallet.Pages
             HistoryTable.ItemsSource = dataAsList.Reverse();
             walletPage = parentPage;
         }
+        private void CloseBtn_OnClick(object sender, RoutedEventArgs e)
+        {
+            MainWindow.Instance.DestroyFloatingFrame();
+        }
     }
 }
