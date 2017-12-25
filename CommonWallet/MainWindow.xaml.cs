@@ -108,11 +108,15 @@ namespace CommonWallet
         {
             Panel.SetZIndex(FloatingGrid, Panel.GetZIndex(Frame) - 1);
         }
-
-
+        
         private void LoginSuccessful(AccountData account)
         {
             Frame.Content = new Homepage(account);
+        }
+
+        public void Logout()
+        {
+            Frame.Content = new Login(LoginSuccessful);
         }
 
     }

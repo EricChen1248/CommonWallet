@@ -72,7 +72,7 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Button Content="登出" FontFamily="Agency FB" FontSize="23" FontWeight="Bold" Foreground="Gray" HorizontalAlignment="Right" Margin="0,165,214,0" VerticalAlignment="Top" Height="33">
+            <Button Content="登出" FontFamily="Agency FB" FontSize="23" FontWeight="Bold" Foreground="Gray" HorizontalAlignment="Right" Margin="0,165,214,0" VerticalAlignment="Top" Height="33" Click="LogoutBtn_Click">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background">

@@ -81,5 +81,10 @@ namespace CommonWallet.Pages
         {
             MainWindow.Instance.NewFloatingFrame(new NewWallet());
         }
+
+        private void LogoutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.Instance.Logout();
+        }
     }
 }
