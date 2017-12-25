@@ -19,9 +19,9 @@ namespace CommonWallet.UserControls
             InitializeComponent();
         }
 
-        public void AddNode(object nodeData, string nodeDisplay)
+        public void AddNode(object nodeData, string nodeDisplay, bool removable = true)
         {
-            var node = new ListerNode(nodeData, nodeDisplay, this);
+            var node = new ListerNode(nodeData, nodeDisplay, this, removable);
             ListerPanel.Children.Add(node);
         }
 
