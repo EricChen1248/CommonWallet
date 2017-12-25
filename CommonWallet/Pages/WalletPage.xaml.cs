@@ -68,6 +68,11 @@ namespace CommonWallet.Pages
 
         }
 
+        private void AddUsers(object sender, RoutedEventArgs routedEventArgs)
+        {
+            MainWindow.Instance.NewFloatingFrame(new AddUsersPage(Wallet));   
+        }
+
         private void HistoryBtn_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.Instance.NewFloatingFrame(new History(Server.GetHistory(Wallet.Guid), this));

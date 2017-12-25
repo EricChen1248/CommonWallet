@@ -79,6 +79,9 @@
     <Compile Include="DataClasses\HistoryData.cs" />
     <Compile Include="DataClasses\WalletData.cs" />
     <Compile Include="DataClasses\WalletUserData.cs" />
+    <Compile Include="Pages\AddUsersPage.xaml.cs">
+      <DependentUpon>AddUsersPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\FundsTransfer.xaml.cs">
       <DependentUpon>FundsTransfer.xaml</DependentUpon>
     </Compile>
@@ -112,6 +115,10 @@
     <Compile Include="UserControls\WalletPanel.xaml.cs">
       <DependentUpon>WalletPanel.xaml</DependentUpon>
     </Compile>
+    <Page Include="Pages\AddUsersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\FundsTransfer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

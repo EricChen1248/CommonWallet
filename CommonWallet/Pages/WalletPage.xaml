@@ -103,7 +103,7 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Button Content="加入用戶" FontFamily="Agency FB" FontSize="23" FontWeight="Bold" Foreground="Gray" HorizontalAlignment="Stretch" Margin="318,0,0,96" VerticalAlignment="Bottom" Height="33" Click="RenameButton" Background="#FFDEDEDE">
+            <Button Content="加入用戶" FontFamily="Agency FB" FontSize="23" FontWeight="Bold" Foreground="Gray" HorizontalAlignment="Stretch" Margin="318,0,0,96" VerticalAlignment="Bottom" Height="33" Background="#FFDEDEDE" Click="AddUsers">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background">
