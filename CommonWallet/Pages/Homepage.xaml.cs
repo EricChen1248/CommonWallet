@@ -15,13 +15,13 @@ namespace CommonWallet.Pages
     /// </summary>
     public partial class Homepage
     {
-        public string UserName => account.UserName;
+        public string UserName => Account.UserName;
+        public readonly AccountData Account;
 
         public static Homepage Instance;
         public Dictionary<string, Wallet> Wallets;
 
         private readonly List<(Color, Color)> colors = new List<(Color, Color)>();
-        private readonly AccountData account;
         private readonly Random rand = new Random();
 
 
@@ -31,7 +31,7 @@ namespace CommonWallet.Pages
             Init();
             Wallets =  new Dictionary<string, Wallet>();
 
-            this.account = account;
+            Account = account;
 
             Instance = this;
 
@@ -56,7 +56,7 @@ namespace CommonWallet.Pages
 
         private void GetWallets()
         {
-            var walletsList = Server.GetUserWallets(account.UserName);
+            var walletsList = Server.GetUserWallets(Account.UserName);
             foreach (var data in walletsList)
             {
                 var wallet = new Wallet(GetRandomColorPair(), data );
@@ -76,46 +76,7 @@ namespace CommonWallet.Pages
 
             WalletPanel.AllignWallets();
         }
-
-        private DispatcherTimer growTimer;
-        private DispatcherTimer shrinkTimer;
-        private void AccountGrid_OnMouseEnter(object sender, MouseEventArgs e)
-        {
-            growTimer = new DispatcherTimer {Interval = TimeSpan.FromMilliseconds(2)};
-            growTimer.Tick += GrowTimer_Tick;
-            growTimer.Start();
-            shrinkTimer?.Stop();
-        }
-
-        private void GrowTimer_Tick(object sender, EventArgs eventArgs)
-        {
-            AccountGrid.Width += 8;
-            AccountGrid.Height += 10;
-            if (AccountGrid.Width >= 300)
-            {
-                growTimer?.Stop();
-            }
-        }
-
-
-        private void AccountGrid_OnMouseLeave(object sender, MouseEventArgs e)
-        {
-            shrinkTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(2)};
-            shrinkTimer.Tick += ShrinkTimer_Tick;
-            shrinkTimer.Start();
-            growTimer?.Stop();
-        }
-
-        private void ShrinkTimer_Tick(object sender, EventArgs e)
-        {
-            AccountGrid.Width -= 8;
-            AccountGrid.Height -= 10;
-            if (AccountGrid.Width <= 80)
-            {
-                shrinkTimer?.Stop();
-            }
-        }
-
+        
         private void AddWalletBtn_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.Instance.NewFloatingFrame(new NewWallet());

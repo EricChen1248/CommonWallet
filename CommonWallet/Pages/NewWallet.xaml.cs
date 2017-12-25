@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using CommonWallet.Class;
+using CommonWallet.DataClasses;
 
 namespace CommonWallet.Pages
 {
@@ -16,6 +19,7 @@ namespace CommonWallet.Pages
         {
             InitializeComponent();
             Lister.BorderColor = Colors.LightGray;
+            Lister.AddNode(Homepage.Instance.Account, Homepage.Instance.Account.AccountName, false);
         }
 
         private void CloseBtn_OnClick(object sender, RoutedEventArgs e)
@@ -30,17 +34,11 @@ namespace CommonWallet.Pages
                 return;
             }
             var account = Server.GetAccountData(AddUserBox.Text);
-            if (account is null)
+            if (account is null || Lister.GetDataList<AccountData>().Contains(account))
             {
-                AddUserBox.Foreground = new SolidColorBrush(Colors.OrangeRed);
-                var timer = new DispatcherTimer {Interval = TimeSpan.FromSeconds(0.25)};
-                timer.Tick += (s, args) =>
-                {
-                    (s as DispatcherTimer)?.Stop();
-                    AddUserBox.Foreground = new SolidColorBrush(Colors.Black);
-                };
-                timer.Start();
-
+                if (!(FindResource("BlinkNoUser") is Storyboard blink)) return;
+                Storyboard.SetTarget(blink, AddUserBox);
+                blink.Begin();
                 return;
             }
 
