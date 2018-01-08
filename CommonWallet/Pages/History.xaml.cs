@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using CommonWallet.Class;
@@ -29,7 +30,7 @@ namespace CommonWallet.Pages
         }
         private void CloseBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            MainWindow.Instance.DestroyFloatingFrame();
+            MainWindow.Instance.NewFloatingFrame(walletPage);
         }
     }
 }

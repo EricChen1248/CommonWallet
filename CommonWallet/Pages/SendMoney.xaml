@@ -1,0 +1,88 @@
+﻿<Page x:Class="CommonWallet.Pages.SendMoney"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CommonWallet.Pages"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      mc:Ignorable="d" 
+      Height="500"
+      Width="500"
+      Title="SendMoney"
+      Background="White">
+
+    <Grid>
+        <Button Grid.Row="0" x:Name="ReturnBtn" HorizontalAlignment="Left" Margin="0,0,0,462" Width="75" BorderBrush="{x:Null}" Foreground="Gray" Click="ReturnBtn_Click" Background="White">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="White"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Label FontFamily="Agency FB" FontSize="22" VerticalAlignment="Center"  VerticalContentAlignment="Center" Content="&lt; Return" >
+                <Label.Style>
+                    <Style TargetType="{x:Type Label}">
+                        <Setter Property="Foreground" Value="DarkGray"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Label}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="DimGray"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+            </Label>
+        </Button>
+        <Button Content="查詢" HorizontalAlignment="Left" Margin="305,217,0,0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="99" Height="37" FontFamily="Microsoft JhengHei" FontSize="20" BorderBrush="{x:Null}" Click="SearchBtn_Click"/>
+        <TextBox x:Name="WalletBox" HorizontalAlignment="Left" Height="37" Margin="90,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="209" VerticalContentAlignment="Center" FontFamily="Microsoft Jhenghei" FontSize="18">
+            <TextBox.Style>
+                <Style TargetType="{x:Type TextBox}">
+                    <Style.Resources>
+                        <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                            <VisualBrush.Visual>
+                                <Label Content="錢包 ID" Foreground="Gray"  FontFamily="Microsoft Jhenghei" FontSize="20" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Style.Resources>
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="Background" Value="White" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <Label x:Name="ResultsLabel" Content="查詢無錢包" HorizontalAlignment="Left" Margin="90,281,0,0" VerticalAlignment="Top" Width="314" Height="39" FontSize="20"/>
+        <TextBox x:Name="TransferBox" Text="0" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" Height="37" Margin="90,149,96,314" TextWrapping="Wrap"  Width="314" FontFamily="Bookman Old Style" TextChanged="TextBoxBase_OnTextChanged" FontWeight="Bold" FontSize="18"/>
+        <Button Content="轉出" HorizontalAlignment="Left" Margin="90,347,0,0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="314" Height="32" FontFamily="Microsoft JhengHei" FontSize="18" BorderBrush="{x:Null}" Click="TransferBtn_OnClick"/>
+        <Label x:Name="WalletMoney" Content="$1300" HorizontalAlignment="Left" Margin="90,96,0,0" VerticalAlignment="Top" Width="314" FontSize="20" FontFamily="Bookman Old Style" FontWeight="Bold" Height="41"/>
+
+    </Grid>
+</Page>

@@ -1,0 +1,99 @@
+﻿<Page x:Class="CommonWallet.Pages.NewUser"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CommonWallet.Pages"
+      xmlns:forms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+      mc:Ignorable="d" 
+      Height="300" 
+      Width="300"
+      Background="White"
+      Title="CreateNewUser">
+
+    <Grid>
+        <Button Grid.Row="0" x:Name="ReturnBtn" HorizontalAlignment="Left" Margin="0,0,0,265" Width="75" BorderBrush="{x:Null}" Foreground="Gray" Click="ReturnBtn_Click" Background="White">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="White"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Label FontFamily="Agency FB" FontSize="22" VerticalAlignment="Center"  VerticalContentAlignment="Center" Content="&lt; Return" >
+                <Label.Style>
+                    <Style TargetType="{x:Type Label}">
+                        <Setter Property="Foreground" Value="DarkGray">
+                        </Setter>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Label}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="DimGray">
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+            </Label>
+        </Button>
+        <TextBlock HorizontalAlignment="Left" Margin="24,58,0,0" TextWrapping="Wrap" Text="帳號" VerticalAlignment="Top" Height="24" FontFamily="Microsoft Jhenghei" FontSize="16"/>
+        <TextBox x:Name="UsernameBox" FontFamily="Microsoft Jhenghei" FontSize="16" Margin="124,55,31,221" IsTabStop="True"/>
+        <TextBlock HorizontalAlignment="Left" Margin="24,98,0,0" TextWrapping="Wrap" Text="姓名" VerticalAlignment="Top" Height="24" FontFamily="Microsoft Jhenghei" FontSize="16"/>
+        <TextBox x:Name="AccountNameBox" FontFamily="Microsoft Jhenghei" FontSize="16" Margin="124,95,31,181" IsTabStop="True"/>
+        <TextBlock HorizontalAlignment="Left" Margin="24,134,0,0" TextWrapping="Wrap" Text="密碼" VerticalAlignment="Top" Height="24" FontFamily="Microsoft Jhenghei" FontSize="16"/>
+        <PasswordBox x:Name="PasswordBox" FontFamily="Microsoft Jhenghei" FontSize="16" Margin="124,133,31,143" IsTabStop="True"/>
+        <PasswordBox x:Name="PasswordBoxCopy" FontFamily="Microsoft Jhenghei" FontSize="16" Margin="124,167,31,109" KeyDown="CreateNewUser" IsTabStop="True"/>
+        <Button Grid.Row="0" x:Name="SignupBtn" HorizontalAlignment="Center" Margin="33,228,33,36" Width="234" BorderBrush="{x:Null}" Foreground="Gray" Click="SignupBtn_OnClick">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush>#FFE2E2E2</SolidColorBrush>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <Brush>#FFD2D2D2</Brush>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Label FontFamily="Agency FB" FontSize="24" VerticalAlignment="Center"  VerticalContentAlignment="Center" Content="申請"/>
+        </Button>
+        <TextBlock HorizontalAlignment="Left" Margin="24,167,0,0" TextWrapping="Wrap" Text="密碼 (第二遍)" VerticalAlignment="Top" Height="24" FontFamily="Microsoft Jhenghei" FontSize="16"/>
+
+    </Grid>
+</Page>

@@ -4,10 +4,10 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CommonWallet.Pages"
-      xmlns:UserControls="clr-namespace:CommonWallet.UserControls" x:Class="CommonWallet.Pages.AddUsersPage"
+      xmlns:userControls="clr-namespace:CommonWallet.UserControls" x:Class="CommonWallet.Pages.AddUsersPage"
       mc:Ignorable="d" 
-      Height="300" 
-      Width="300"
+      Height="500" 
+      Width="500"
       Title="AddUsersPage"
       Background="White">
     <Page.Resources>
@@ -22,7 +22,7 @@
     </Page.Resources>
 
     <Grid>
-        <Button Grid.Row="0" x:Name="CloseBtn" HorizontalAlignment="Right" Height="30" Margin="0,0,0,270" Width="40" BorderBrush="{x:Null}" Foreground="{x:Null}" Click ="CloseBtn_OnClick" >
+        <Button Grid.Row="0" x:Name="CloseBtn" HorizontalAlignment="Right" Height="30" Margin="0,0,0,470" Width="40" BorderBrush="{x:Null}" Foreground="{x:Null}" Click ="CloseBtn_OnClick" >
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background">
@@ -51,10 +51,10 @@
                 </Style>
             </Button.Style>
         </Button>
-        <UserControls:Lister x:Name="Lister" HorizontalAlignment="Left" Height="160" Margin="27,82,0,0" VerticalAlignment="Top" Width="245" />
-        <TextBlock HorizontalAlignment="Left" Margin="27,42,0,0" TextWrapping="Wrap" Text="新增使用者" VerticalAlignment="Top" Height="29" FontFamily="Microsoft Jhenghei" FontSize="16"/>
-        <TextBox x:Name="AddUserBox" FontFamily="Microsoft Jhenghei" FontSize="16" Margin="127,38,28,233" KeyDown="AddUserBox_OnKeyDown"/>
-        <Button Content="完成" FontFamily="Agency FB" FontSize="23" FontWeight="Bold" Foreground="Gray" HorizontalAlignment="Right" Margin="0,0,28,10" VerticalAlignment="Bottom" Height="36" HorizontalContentAlignment="Center" Width="245" Click="CompleteBtn_Click">
+        <userControls:Lister x:Name="Lister" HorizontalAlignment="Left" Height="239" Margin="27,139,0,0" VerticalAlignment="Top" Width="431" />
+        <TextBlock HorizontalAlignment="Left" Margin="27,83,0,0" TextWrapping="Wrap" Text="新增使用者" VerticalAlignment="Top" Height="29" FontFamily="Microsoft Jhenghei" FontSize="16"/>
+        <TextBox x:Name="AddUserBox" FontFamily="Microsoft Jhenghei" FontSize="16" Margin="129,71,42,388" KeyDown="AddUserBox_OnKeyDown"/>
+        <Button Content="完成" FontFamily="Agency FB" FontSize="23" FontWeight="Bold" Foreground="Gray" HorizontalAlignment="Right" Margin="0,0,42,49" VerticalAlignment="Bottom" Height="36" HorizontalContentAlignment="Center" Width="431" Click="CompleteBtn_Click">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background">

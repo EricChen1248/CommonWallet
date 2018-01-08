@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800" WindowStyle="None" ResizeMode="NoResize" BorderBrush="#FF686868" BorderThickness="1">
+        Title="MainWindow" Height="600" Width="800" WindowStyle="None" ResizeMode="NoResize" BorderBrush="#FF686868" BorderThickness="1" WindowStartupLocation="CenterScreen">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -100,7 +100,7 @@
             </Button.Style>
         </Button>
         <Grid x:Name="FloatingGrid" HorizontalAlignment="Stretch"  Grid.Row="1" VerticalAlignment="Stretch" >
-            <Rectangle Width="800" Height="600" Fill="#CCE2E2E2"/>
+            <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="#CCE2E2E2"/>
             <Frame x:Name="FloatingFrame"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" NavigationUIVisibility="Hidden" Navigated="Frame_Navigated"/>
         </Grid>
         <Frame x:Name="Frame" Content="Frame" HorizontalAlignment="Stretch" Margin="0,0,0,0" Grid.Row="1" VerticalAlignment="Stretch" NavigationUIVisibility="Hidden" Navigated="Frame_Navigated"/>

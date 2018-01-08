@@ -10,7 +10,7 @@
       Background="White">
 
     <Grid>
-        <TextBox x:Name="UserBox" HorizontalAlignment ="Center" VerticalAlignment="Center" Height ="40" Width ="400" Margin="0,-80,0,0" HorizontalContentAlignment="Center" FontFamily="Agency FB" FontSize="28" CharacterCasing="Upper">
+        <TextBox x:Name="UserBox" HorizontalAlignment ="Center" VerticalAlignment="Center" Height ="40" Width ="400" Margin="0,-80,0,0" HorizontalContentAlignment="Center" FontFamily="Agency FB" FontSize="28" CharacterCasing="Lower">
             <TextBox.Style>
                 <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
                     <Style.Resources>
@@ -65,6 +65,36 @@
                 </Style>
             </Button.Style>
             <Label FontFamily="Agency FB" FontSize="28" VerticalAlignment="Center"  VerticalContentAlignment="Center" Content="LOGIN"/>
+        </Button>
+        <Button Grid.Row="0" x:Name="SignupBtn" HorizontalAlignment="Center" Height="40" Margin="0, 400,0,0" Width="300" BorderBrush="{x:Null}" Foreground="Gray" Click="SignupBtn_Click">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush>#FFE2E2E2</SolidColorBrush>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <Brush>#FFD2D2D2</Brush>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Label FontFamily="Agency FB" FontSize="26" VerticalAlignment="Center"  VerticalContentAlignment="Center" Content="Sign up"/>
         </Button>
     </Grid>
 </Page>

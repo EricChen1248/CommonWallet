@@ -17,12 +17,21 @@ namespace CommonWallet.Class
     internal static class Server
     {
         private const string ServerLocation = "Resources/Database/Database.db";
+        private static readonly Dictionary<Type, string> TableNames = new Dictionary<Type, string>();
 
+        public static void InitalizeServer()
+        {
+            TableNames.Add(typeof(WalletData), "Wallets");
+            TableNames.Add(typeof(WalletUserData), "UserWallets");
+            TableNames.Add(typeof(HistoryData), "TransactionHistory");
+            TableNames.Add(typeof(AccountData), "Accounts");
+
+        }
         public static IEnumerable<HistoryData> GetHistory(string walletGuid)
         {
             using (var db = new LiteDatabase(ServerLocation))
             {
-                return db.GetCollection<HistoryData>("TransactionHistory").Find(Query.EQ("WalletGuid", walletGuid)).ToList();
+                return db.GetCollection<HistoryData>(TableNames[typeof(HistoryData)]).Find(Query.EQ("WalletGuid", walletGuid)).ToList();
             }
         }
 
@@ -30,8 +39,8 @@ namespace CommonWallet.Class
         {
             using (var db = new LiteDatabase(ServerLocation))
             {
-                var walletsGuid = db.GetCollection<WalletUserData>("UserWallets").Find(x => x.UserName == userName).Select(x => x.WalletGuid).ToHashSet();
-                return db.GetCollection<WalletData>("Wallets").Find(x => walletsGuid.Contains(x.Guid)).ToList();
+                var walletsGuid = db.GetCollection<WalletUserData>(TableNames[typeof(WalletUserData)]).Find(x => x.UserName == userName).Select(x => x.WalletGuid).ToHashSet();
+                return db.GetCollection<WalletData>(TableNames[typeof(WalletData)]).Find(x => walletsGuid.Contains(x.Guid)).ToList();
             }
         }
 
@@ -39,14 +48,14 @@ namespace CommonWallet.Class
         {
             using (var db = new LiteDatabase(ServerLocation))
             {
-                return db.GetCollection<WalletUserData>("UserWallets").Find(x => x.WalletGuid == walletGuid).ToList();
+                return db.GetCollection<WalletUserData>(TableNames[typeof(WalletUserData)]).Find(x => x.WalletGuid == walletGuid).ToList();
             }
         }
         public static WalletData GetWalletData(string walletGuid)
         {
             using (var db = new LiteDatabase(ServerLocation))
             {
-                return db.GetCollection<WalletData>("Wallets").Find(x => x.Guid == walletGuid).FirstOrDefault();
+                return db.GetCollection<WalletData>(TableNames[typeof(WalletData)]).Find(x => x.Guid == walletGuid).FirstOrDefault();
             }
         }
 
@@ -54,7 +63,7 @@ namespace CommonWallet.Class
         {
             using (var db = new LiteDatabase(ServerLocation))
             {
-                return db.GetCollection<AccountData>("Accounts").Find(x => x.UserName == userName).FirstOrDefault();
+                return db.GetCollection<AccountData>(TableNames[typeof(AccountData)]).Find(x => x.UserName == userName).FirstOrDefault();
             }   
         }
         
@@ -103,7 +112,7 @@ namespace CommonWallet.Class
 
         public static void AddWalletUsers(IEnumerable<AccountData> accounts, string walletGuid)
         {
-            if (!(accounts is IList<AccountData> accountDatas)) return;
+            var accountDatas = accounts.ToList();
 
             using (var db = new LiteDatabase(ServerLocation))
             {
@@ -111,7 +120,7 @@ namespace CommonWallet.Class
                     from account in accountDatas
                     select new WalletUserData
                     {
-                        UserName = account.AccountName,
+                        UserName = account.UserName,
                         WalletGuid = walletGuid
                     };
 
@@ -120,6 +129,27 @@ namespace CommonWallet.Class
 
                 table.EnsureIndex(x => x.UserName);
                 table.EnsureIndex(x => x.WalletGuid);
+            }
+        }
+
+        public static void RemoveWalletUsers(IEnumerable<string> userNames, string walletGuid)
+        {
+            using (var db = new LiteDatabase(ServerLocation))
+            {
+                var hash = userNames.ToHashSet();
+                var table = db.GetCollection<WalletUserData>(TableNames[typeof(WalletUserData)]);
+                table.Delete(x => hash.Contains(x.UserName));
+
+            }
+        }
+
+        public static void AddUser(AccountData account)
+        {
+            using (var db = new LiteDatabase(ServerLocation))
+            {
+                var table = db.GetCollection<AccountData>("Accounts");
+                table.Insert(account);
+                table.EnsureIndex(x => x.UserName);
             }
         }
     }

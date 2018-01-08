@@ -58,6 +58,7 @@ namespace CommonWallet.Pages
         private void GetWallets()
         {
             var walletsList = Server.GetUserWallets(Account.UserName);
+            Wallets.Clear();
             foreach (var data in walletsList)
             {
                 var wallet = new Wallet(GetRandomColorPair(), data );
@@ -86,6 +87,12 @@ namespace CommonWallet.Pages
         private void LogoutBtn_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.Instance.Logout();
+        }
+
+        private void RefreshBtn_Click(object sender, RoutedEventArgs e)
+        {
+            GetWallets();
+            RefreshWallets();
         }
     }
 }

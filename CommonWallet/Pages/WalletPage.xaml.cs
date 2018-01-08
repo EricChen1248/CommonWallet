@@ -70,12 +70,17 @@ namespace CommonWallet.Pages
 
         private void AddUsers(object sender, RoutedEventArgs routedEventArgs)
         {
-            MainWindow.Instance.NewFloatingFrame(new AddUsersPage(Wallet));   
+            MainWindow.Instance.NewFloatingFrame(new AddUsersPage(Wallet, this));   
         }
 
         private void HistoryBtn_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.Instance.NewFloatingFrame(new History(Server.GetHistory(Wallet.Guid), this));
+        }
+
+        private void SendMoney_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.Instance.NewFloatingFrame(new SendMoney(Wallet, this));
         }
     }
 }

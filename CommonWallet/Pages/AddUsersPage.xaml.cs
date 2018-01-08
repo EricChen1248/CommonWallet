@@ -25,16 +25,18 @@ namespace CommonWallet.Pages
     public partial class AddUsersPage
     {
         private readonly Wallet wallet;
-        public AddUsersPage(Wallet parentWallet)
+        private readonly WalletPage parentWallet;
+        public AddUsersPage(Wallet parentWallet, WalletPage walletPage)
         {
             InitializeComponent();
             wallet = parentWallet;
+            this.parentWallet = walletPage;
             Lister.AddNode(Homepage.Instance.Account, Homepage.Instance.Account.AccountName, false); 
 
             foreach (var walletUserData in Server.GetUsersOfWallet(wallet.Guid))
             {
                 if (walletUserData.UserName == Homepage.Instance.Account.UserName)
-                    return;
+                    continue;
 
                 var user = Server.GetAccountData(walletUserData.UserName);
                 Lister.AddNode(user, user.AccountName);
@@ -43,7 +45,7 @@ namespace CommonWallet.Pages
 
         private void CloseBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            MainWindow.Instance.DestroyFloatingFrame();
+            MainWindow.Instance.NewFloatingFrame(parentWallet);
         }
 
         private void AddUserBox_OnKeyDown(object sender, KeyEventArgs e)
@@ -67,14 +69,16 @@ namespace CommonWallet.Pages
 
         private void CompleteBtn_Click(object sender, RoutedEventArgs e)
         {
-            var users = Lister.GetDataList<AccountData>();
-            var alreadyIsUser = Server.GetUsersOfWallet(wallet.Guid).Select(u => u.UserName);
+            var users = Lister.GetDataList<AccountData>().ToList();
+            var alreadyIsUser = Server.GetUsersOfWallet(wallet.Guid).Select(u => u.UserName).ToHashSet();
 
-            var newUsers = users.Where(u => !alreadyIsUser.Contains(u.AccountName));
-            foreach (var accountData in newUsers)
-            {
-                
-            }
+            var newUsers = users.Where(u => !alreadyIsUser.Contains(u.UserName));
+            Server.AddWalletUsers(newUsers, wallet.Guid);
+            var selectedUsersNames = users.Select(u => u.UserName).ToHashSet();
+            var removedUsers = alreadyIsUser.Where(u => !selectedUsersNames.Contains(u));
+            Server.RemoveWalletUsers(removedUsers, wallet.Guid);
+
+            MainWindow.Instance.NewFloatingFrame(parentWallet);
         }
     }
 }

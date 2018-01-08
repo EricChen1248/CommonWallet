@@ -131,7 +131,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button FontFamily="Agency FB" FontSize="23" FontWeight="Bold" Foreground="Gray" HorizontalAlignment="Right" Margin="0,0,148,10" VerticalAlignment="Bottom" Height="44" HorizontalContentAlignment="Center" Width="43" BorderBrush="#FFE8E8E8">
+        <Button FontFamily="Agency FB" FontSize="23" FontWeight="Bold" Foreground="Gray" HorizontalAlignment="Right" Margin="0,0,148,10" VerticalAlignment="Bottom" Height="44" HorizontalContentAlignment="Center" Width="43" BorderBrush="#FFE8E8E8" Click="RefreshBtn_Click">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background">

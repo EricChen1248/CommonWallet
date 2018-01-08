@@ -62,5 +62,10 @@ namespace CommonWallet.Pages
             loginSuccessful(dataBaseAccount);
 
         }
+
+        private void SignupBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.Instance.NewFloatingFrame(new NewUser());
+        }
     }
 }

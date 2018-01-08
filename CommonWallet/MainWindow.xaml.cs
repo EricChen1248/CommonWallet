@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using CommonWallet.Class;
 using CommonWallet.DataClasses;
 using CommonWallet.Pages;
 
@@ -18,6 +19,7 @@ namespace CommonWallet
             InitializeComponent();
             Frame.Navigated += Frame_Navigated;
             InitTitleBar();
+            Server. InitalizeServer();
             
             Frame.Content = new Login(LoginSuccessful);
             Instance = this;
